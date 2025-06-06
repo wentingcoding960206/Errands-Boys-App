@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "10558508194",
+    "project_id": "errand-boys-acfeb",
+    "storage_bucket": "errand-boys-acfeb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:10558508194:android:95661a82b326eff32c5bfb",
+        "android_client_info": {
+          "package_name": "com.example.errands_boys"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvrECZpxlYV5kUq4UZ-Ndn1vX0Ruofibk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:10558508194:android:e526c5cb47dda5162c5bfb",
+        "android_client_info": {
+          "package_name": "com.example.errandsboys"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvrECZpxlYV5kUq4UZ-Ndn1vX0Ruofibk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

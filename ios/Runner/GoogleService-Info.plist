@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>10558508194-353egss1t95nsc4f7ldq6pqt7hu32cn6.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.10558508194-353egss1t95nsc4f7ldq6pqt7hu32cn6</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>10558508194-r8r1gmkjnkp39cis6740n3uvgtohf9vm.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyARl8tDfy3dBj15SfuOlHkD2TRz9dqaclk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>10558508194</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.errandsBoys</string>
+	<key>PROJECT_ID</key>
+	<string>errand-boys-acfeb</string>
+	<key>STORAGE_BUCKET</key>
+	<string>errand-boys-acfeb.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:10558508194:ios:ff380aa07b73bf0d2c5bfb</string>
+</dict>
+</plist>

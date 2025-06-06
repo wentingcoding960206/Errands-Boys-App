@@ -4,7 +4,14 @@ class LoginScreenTextField extends StatelessWidget {
 
   final TextEditingController textFieldController;
   final String textFieldLabel;
-  const LoginScreenTextField({super.key, required this.textFieldLabel, required this.textFieldController});
+  final bool obscureText;
+  
+  const LoginScreenTextField({
+    super.key, 
+    required this.textFieldLabel, 
+    required this.textFieldController,
+    required this.obscureText
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +32,7 @@ class LoginScreenTextField extends StatelessWidget {
               width: double.infinity, // Makes the TextField take the full width
               height: 50, 
               child: TextField(
+                obscureText: obscureText,
                 style: TextStyle(color: Colors.white),
                 controller: textFieldController,
                 decoration: InputDecoration(

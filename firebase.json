@@ -1,0 +1,57 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "errand-boys-acfeb",
+          "appId": "1:10558508194:android:95661a82b326eff32c5bfb",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "errand-boys-acfeb",
+          "appId": "1:10558508194:ios:ff380aa07b73bf0d2c5bfb",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "macos": {
+        "default": {
+          "projectId": "errand-boys-acfeb",
+          "appId": "1:10558508194:ios:ff380aa07b73bf0d2c5bfb",
+          "uploadDebugSymbols": false,
+          "fileOutput": "macos/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "errand-boys-acfeb",
+          "configurations": {
+            "android": "1:10558508194:android:95661a82b326eff32c5bfb",
+            "ios": "1:10558508194:ios:ff380aa07b73bf0d2c5bfb",
+            "macos": "1:10558508194:ios:ff380aa07b73bf0d2c5bfb",
+            "web": "1:10558508194:web:a45d61c01f2082102c5bfb",
+            "windows": "1:10558508194:web:70575e23eb33a6eb2c5bfb"
+          }
+        }
+      }
+    }
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ],
+      "predeploy": [
+        "npm --prefix \"$RESOURCE_DIR\" run lint"
+      ]
+    }
+  ]
+}

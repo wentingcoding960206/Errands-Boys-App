@@ -1,12 +1,56 @@
 import 'dart:developer';
 
+import 'package:errands_boys/auth_service.dart';
+import 'package:errands_boys/login_screen/forgot_password_page.dart';
 import 'package:errands_boys/login_screen/text_field.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
-  final TextEditingController emailController = TextEditingController();
+class LoginChatpages extends StatelessWidget {
+  LoginChatpages({
+    super.key,
+    required this.onTap,
+  });
+  final TextEditingController UsernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final String googleButton = "google";
+  final String facebookButton = "facebook";
+  final String appleButton = "apple";
+
+  // tap to go to register page
+  final void Function()? onTap;
+
+  // login
+  void login(BuildContext context) async{
+    // get auth service
+    final authService = AuthService();
+
+    // try login
+    try {
+      await authService.signInWithEmailPassword(UsernameController.text, passwordController.text);
+    } catch (e) {
+      showDialog(
+        context: context, 
+        builder: (context) => AlertDialog(
+          title: Text(e.toString())
+        ),
+        
+      );
+    }
+
+    // catch any errors
+  }
+
+  void googleSignIn() {
+    AuthService().signInWithGoogle();
+  }
+
+  void appleSignIn() {
+    print("apple pressed");
+  }
+
+  void facebookSignIn() {
+    print("facebook pressed");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +83,8 @@ class LoginScreen extends StatelessWidget {
                 // Login text field (Email)
                 LoginScreenTextField(
                   textFieldLabel: 'Email',
-                  textFieldController: emailController,
+                  textFieldController: UsernameController,
+                  obscureText: false,
                 ),
                 const SizedBox(height: 20),
 
@@ -47,6 +92,7 @@ class LoginScreen extends StatelessWidget {
                 LoginScreenTextField(
                   textFieldLabel: 'Password',
                   textFieldController: passwordController,
+                  obscureText: true,
                 ),
 
                 //const SizedBox(height: 15),
@@ -57,6 +103,11 @@ class LoginScreen extends StatelessWidget {
                     child: TextButton(
                       onPressed: () {
                         log('Forgot Password Button Pressed');
+                        Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                            return ForgotPasswordPage();
+                          })
+                        );
                       },
                       style: TextButton.styleFrom(
                         foregroundColor: Colors.blueAccent,
@@ -75,6 +126,7 @@ class LoginScreen extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 40),
                       child: ElevatedButton(
                         onPressed: () {
+                          login(context);
                           log('Login Button Pressed');
                         },
                         style: ElevatedButton.styleFrom(
@@ -86,76 +138,35 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 30),
 
-                // Authentication Choices (Google, Facebook & Apple)
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 100),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      // Google Button
-                      Material(
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.circular(30),
-                        child: InkWell(
-                          borderRadius: BorderRadius.circular(30),
-                          onTap: () {
-                            log('Google Button Pressed');
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Image.asset(
-                              'assets/images/google_icon.png',
-                              width: 40,
-                              height: 40,
-                            ),
-                          ),
-                        ),
-                      ),
+                // // Authentication Choices (Google, Facebook & Apple)
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 100),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //     children: [
 
-                      // Facebook Button 
-                      Material(
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.circular(30),
-                        child: InkWell(
-                          borderRadius: BorderRadius.circular(30),
-                          onTap: () {
-                            log('Facebook Button Pressed');
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Image.asset(
-                              'assets/images/facebook_icon.png',
-                              width: 60,
-                              height: 60,
-                            ),
-                          ),
-                        ),
-                      ),
+                //       // Google Button
+                //       AuthButton(
+                //         buttonLabel: googleButton,
+                //         onTap: googleSignIn,
+                //       ),
 
-                      //Apple Button
-                      Material(
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.circular(30),
-                        child: InkWell(
-                          borderRadius: BorderRadius.circular(30),
-                          onTap: () {
-                            log('Apple Button Pressed');
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Image.asset(
-                              'assets/images/apple_icon.png',
-                              width: 45,
-                              height: 45,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                //       // // Facebook Button 
+                //       // AuthButton(
+                //       //   buttonLabel: facebookButton,
+                //       //   onTap: facebookSignIn
+                //       // ),
+
+                //       // //Apple Button
+                //       // AuthButton(
+                //       //   buttonLabel: appleButton,
+                //       //   onTap: appleSignIn
+                //       // ),
+                //     ],
+                //   ),
+                // ),
                 const Expanded(child: SizedBox()),
 
                 Padding(
@@ -167,10 +178,11 @@ class LoginScreen extends StatelessWidget {
                         'Don\'t have an account?'
                       ),
 
-                      TextButton(
-                        onPressed: () {
-                          log('Sign Up Button Pressed');
-                        }, 
+                      SizedBox(width: 30,),
+
+
+                      GestureDetector(
+                        onTap: onTap, 
                         child: Text(
                           'Sign Up',
                           style: TextStyle(
