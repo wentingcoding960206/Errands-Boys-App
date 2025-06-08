@@ -435,7 +435,7 @@ class _PriceScreen extends State<PriceScreen> {
                       {
                         // 'userId': FirebaseAuth.instance.currentUser!.uid,
                         // 'userName': fullName_formController.text,
-                        'service': selectedServiceName,
+                        //'service': selectedServiceName,
                         //'timeslots': [], // initialize empty array if new
                         'timestamp': Timestamp.now(),
                       },
@@ -465,7 +465,7 @@ class _PriceScreen extends State<PriceScreen> {
                       {
                         // 'userId': FirebaseAuth.instance.currentUser!.uid,
                         // 'userName': fullName_formController.text,
-                        'service': selectedServiceName,
+                        
                         //'timeslots': [], // initialize empty array if new
                         'timestamp': Timestamp.now(),
                       },
@@ -475,6 +475,7 @@ class _PriceScreen extends State<PriceScreen> {
                     // 2. Add new time slot(s) to timeslots array without removing old ones
                     if (selectedTimeSlot != null &&
                         selectedTimeSlot.isNotEmpty) {
+                          
                       await docRefCus.update({
                         'timeslots': FieldValue.arrayUnion(
                           selectedTimeSlot is List<String>

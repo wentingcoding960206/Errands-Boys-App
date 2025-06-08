@@ -213,22 +213,24 @@ class ServiceSelectorButtonState extends State<ServiceSelectorButton> {
                     final next7Days = getNext7DaysFromTomorrow();
                     final filteredEntries =
                         <MapEntry<DateTime, List<String>>>[];
+                    final today = DateTime.now(); //
+                    int daysChecked = 0; //
+                    int daysWithAvailability = 0; //
 
-                    for (final date in next7Days) {
+                    while (daysWithAvailability < 7 && daysChecked < 30) {
+                      final date = today.add(Duration(days: daysChecked + 1));
                       final weekday = weekdayShortName(date);
 
-                      if (!availabilityMap.containsKey(weekday)) continue;
-
-                      print("selector button provider id: ${provider['id']}");
-                      print("customer: ${FirebaseAuth.instance.currentUser?.uid}");
+                      if (!availabilityMap.containsKey(weekday)) {
+                        daysChecked++;
+                        continue;
+                      }
 
                       final allSlots = availabilityMap[weekday]!;
 
-                      print("allSlots: $allSlots");
                       final booked = await fetchProvidersBookedSlots(
                         provider['id'],
-                      ); // You'll define this
-
+                      );
                       final bookedCus = await fetchCustomersBookedSlots(
                         FirebaseAuth.instance.currentUser?.uid ?? "",
                       );
@@ -240,14 +242,10 @@ class ServiceSelectorButtonState extends State<ServiceSelectorButton> {
                           allSlots.where((slot) {
                             final formattedSlot =
                                 '$label at $slot'.toLowerCase();
-                            print("formattedSlot: $formattedSlot");
-
                             final bookedLower =
                                 booked
                                     .map((b) => b.trim().toLowerCase())
                                     .toList();
-                            print("bookedLower: $bookedLower");
-
                             final bookedCusLower =
                                 bookedCus
                                     .map((b) => b.trim().toLowerCase())
@@ -256,15 +254,67 @@ class ServiceSelectorButtonState extends State<ServiceSelectorButton> {
                                 !bookedCusLower.contains(formattedSlot);
                           }).toList();
 
-                      print("allSlots: $allSlots");
-                      print("booked (provider): $booked");
-                      print("book (customer): $bookedCus");
-                      print("Available after filtering: $availableSlots");
-
                       if (availableSlots.isNotEmpty) {
                         filteredEntries.add(MapEntry(date, availableSlots));
+                        daysWithAvailability++;
                       }
+
+                      daysChecked++;
                     }
+
+                    // for (final date in next7Days) {
+                    //   final weekday = weekdayShortName(date);
+
+                    //   if (!availabilityMap.containsKey(weekday)) continue;
+
+                    //   print("selector button provider id: ${provider['id']}");
+                    //   print(
+                    //     "customer: ${FirebaseAuth.instance.currentUser?.uid}",
+                    //   );
+
+                    //   final allSlots = availabilityMap[weekday]!;
+
+                    //   print("allSlots: $allSlots");
+                    //   final booked = await fetchProvidersBookedSlots(
+                    //     provider['id'],
+                    //   ); // You'll define this
+
+                    //   final bookedCus = await fetchCustomersBookedSlots(
+                    //     FirebaseAuth.instance.currentUser?.uid ?? "",
+                    //   );
+
+                    //   final label =
+                    //       '${weekdayShortName(date)} (${formatDate(date)})';
+
+                    //   final availableSlots =
+                    //       allSlots.where((slot) {
+                    //         final formattedSlot =
+                    //             '$label at $slot'.toLowerCase();
+                    //         print("formattedSlot: $formattedSlot");
+
+                    //         final bookedLower =
+                    //             booked
+                    //                 .map((b) => b.trim().toLowerCase())
+                    //                 .toList();
+                    //         print("bookedLower: $bookedLower");
+
+                    //         final bookedCusLower =
+                    //             bookedCus
+                    //                 .map((b) => b.trim().toLowerCase())
+                    //                 .toList();
+                    //         return !bookedLower.contains(formattedSlot) &&
+                    //             !bookedCusLower.contains(formattedSlot);
+                    //       }).toList();
+
+                    //   print("allSlots: $allSlots");
+                    //   print("booked (provider): $booked");
+                    //   print("book (customer): $bookedCus");
+                    //   print("Available after filtering: $availableSlots");
+
+                    //   if (availableSlots.isNotEmpty) {
+                    //     filteredEntries.add(MapEntry(date, availableSlots));
+                    //   }
+                    // }
 
                     showDialog(
                       context: context,
